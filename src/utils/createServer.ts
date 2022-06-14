@@ -5,6 +5,7 @@ import fastify from "fastify";
 import { buildSchema } from "type-graphql";
 import UserResolver from "../modules/user/user.resolver";
 import { buildContext } from "./buildContext";
+import { fastifyAppClosePlugin } from "./plugins";
 
 const app = fastify();
 
@@ -15,7 +16,10 @@ export async function createServer() {
 
   const server = new ApolloServer({
     schema,
-    plugins: [ApolloServerPluginDrainHttpServer({ httpServer: app.server })],
+    plugins: [
+      fastifyAppClosePlugin(app),
+      ApolloServerPluginDrainHttpServer({ httpServer: app.server }),
+    ],
     context: buildContext(),
   });
 
