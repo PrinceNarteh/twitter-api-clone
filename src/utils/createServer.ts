@@ -64,7 +64,7 @@ const subscriptionServer = ({
   server,
 }: {
   schema: GraphQLSchema;
-  server: ApolloServer;
+  server: typeof app.server;
 }) => {
   return SubscriptionServer.create(
     {
