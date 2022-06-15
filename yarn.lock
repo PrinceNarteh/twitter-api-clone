@@ -121,9 +121,9 @@
   integrity sha512-wI3fpfDT0t7p8E6dA2eTECzzOd+bZsZCJ2Hcv+Onn2b7ZwK3RwD27uW2QDaMtQhAfWQQP+WNK7nKf0twLsBf9w==
 
 "@fastify/jwt@^5.1.0":
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/@fastify/jwt/-/jwt-5.0.1.tgz#9c44bc994c372019a23cb6dd8a3bd7f93e7ab88b"
-  integrity sha512-BF2JrhSRcMRwHim2pbFEgWLJE8DdRh0NaGeAgU+ZFICj2AHxGvrHSOaYRaXNUQixgmGjVaTrbRFl3bSBc6Pj+g==
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@fastify/jwt/-/jwt-6.1.0.tgz#982d6ed9dec95bca6cd35c0de3463890c208674d"
+  integrity sha512-HBNSmX4AH8bwGHjjf7p/nx+Zjk2weX4iRziBpKyvZvA9Ipc7GE/Oxk+f7VsaiNuZ3R2vs42nBgvddacT6guaEw==
   dependencies:
     "@lukeed/ms" "^2.0.0"
     fast-jwt "^1.5.1"
@@ -213,6 +213,18 @@
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@phc/format/-/format-1.0.0.tgz#b5627003b3216dc4362125b13f48a4daa76680e4"
   integrity sha512-m7X9U6BG2+J+R1lSOdCiITLLrxm+cWlNI3HUFA92oLO77ObGNzaKdh8pMLqdZcshtkKuV84olNNXDfMc4FezBQ==
+
+"@prisma/client@^3.15.1":
+  version "3.15.1"
+  resolved "https://registry.yarnpkg.com/@prisma/client/-/client-3.15.1.tgz#798e8bf0370abe686d599c822e93f7adb7c0c9c0"
+  integrity sha512-Lsk7oupvO9g99mrIs07iE6BIMouHs46Yq/YY8itTsUQNKfecsPuZvVYvcKci0pqRQ0neOpvIvoA/ouZmIMBCrQ==
+  dependencies:
+    "@prisma/engines-version" "3.15.1-1.461d6a05159055555eb7dfb337c9fb271cbd4d7e"
+
+"@prisma/engines-version@3.15.1-1.461d6a05159055555eb7dfb337c9fb271cbd4d7e":
+  version "3.15.1-1.461d6a05159055555eb7dfb337c9fb271cbd4d7e"
+  resolved "https://registry.yarnpkg.com/@prisma/engines-version/-/engines-version-3.15.1-1.461d6a05159055555eb7dfb337c9fb271cbd4d7e.tgz#bf5e2373ca68ce7556b967cb4965a7095e93fe53"
+  integrity sha512-e3k2Vd606efd1ZYy2NQKkT4C/pn31nehyLhVug6To/q8JT8FpiMrDy7zmm3KLF0L98NOQQcutaVtAPhzKhzn9w==
 
 "@prisma/engines@3.15.1-1.461d6a05159055555eb7dfb337c9fb271cbd4d7e":
   version "3.15.1-1.461d6a05159055555eb7dfb337c9fb271cbd4d7e"
