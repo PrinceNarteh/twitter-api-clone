@@ -33,3 +33,5 @@ export async function buildContext({
     };
   }
 }
+
+export type Context = Awaited<ReturnType<typeof buildContext>>

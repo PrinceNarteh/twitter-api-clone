@@ -18,7 +18,7 @@ export const app = fastify();
 app.register(fastifyCors, {
   credentials: true,
   origin: (origin, cb) => {
-    if (["http://localhost:3000"].includes(origin)) {
+    if (!origin || ["http://localhost:3000"].includes(origin)) {
       return cb(null, true);
     }
     return cb(new Error("Not Allowed"), false);
