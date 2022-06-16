@@ -28,3 +28,13 @@ export class RegisterUserInput {
   @Length(6, 32)
   password: string;
 }
+
+@InputType()
+export class LoginInput {
+  @Field({ nullable: false })
+  usernameOrEmail: string;
+
+  @Field({ nullable: false })
+  @Length(6, 32)
+  password: string;
+}

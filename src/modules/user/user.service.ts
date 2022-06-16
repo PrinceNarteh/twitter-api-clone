@@ -1,6 +1,6 @@
 import argon2 from "argon2";
 import prisma from "../../libs/prisma";
-import { RegisterUserInput } from "./user.dto";
+import { LoginInput, RegisterUserInput } from "./user.dto";
 
 export async function createUser(input: RegisterUserInput) {
   const { email, password } = input;
@@ -16,4 +16,14 @@ export async function createUser(input: RegisterUserInput) {
   });
 
   return user;
+}
+
+export async function findUserByEmailOrUsername(
+  input: LoginInput["usernameOrEmail"]
+) {
+  return prisma.user.findFirst({
+    where: {
+      OR: [{ email: input }, { username: input }],
+    },
+  });
 }
