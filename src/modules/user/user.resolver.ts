@@ -8,6 +8,7 @@ import {
   Mutation,
   Query,
   Resolver,
+  Root,
 } from "type-graphql";
 import { Context } from "../../utils/buildContext";
 import {
@@ -96,10 +97,9 @@ class UserResolver {
     }
   }
 
-  @Authorized()
   @FieldResolver(() => UserFollowers)
-  async followers(@Ctx() ctx: Context) {
-    const data = await findUsersFollowedBy(ctx.user?.id!);
+  async followers(@Root() user: User) {
+    const data = await findUsersFollowedBy(user.id);
 
     return {
       count: data?.followedBy.length,
@@ -107,10 +107,9 @@ class UserResolver {
     };
   }
 
-  @Authorized()
   @FieldResolver(() => UserFollowers)
-  async following(@Ctx() ctx: Context) {
-    const data = await findUsersFollowing(ctx.user?.id!);
+  async following(@Root() user: User) {
+    const data = await findUsersFollowing(user.id);
 
     return {
       count: data?.following.length,
