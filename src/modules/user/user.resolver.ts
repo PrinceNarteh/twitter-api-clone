@@ -1,8 +1,15 @@
 import { ApolloError } from "apollo-server-core";
 import argon2 from "argon2";
-import { Arg, Ctx, Mutation, Query, Resolver } from "type-graphql";
+import {
+  Arg,
+  Ctx,
+  FieldResolver,
+  Mutation,
+  Query,
+  Resolver,
+} from "type-graphql";
 import { Context } from "../../utils/buildContext";
-import { LoginInput, RegisterUserInput, User } from "./user.dto";
+import { LoginInput, RegisterUserInput, User, UserFollowers } from "./user.dto";
 import { createUser, findUserByEmailOrUsername } from "./user.service";
 
 @Resolver(() => User)
@@ -50,6 +57,22 @@ class UserResolver {
     });
 
     return token;
+  }
+
+  @FieldResolver(() => UserFollowers)
+  followers() {
+    return {
+      count: 0,
+      items: [],
+    };
+  }
+
+  @FieldResolver(() => UserFollowers)
+  following() {
+    return {
+      count: 0,
+      items: [],
+    };
   }
 }
 
