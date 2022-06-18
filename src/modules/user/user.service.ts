@@ -1,3 +1,4 @@
+import { User } from "@prisma/client";
 import argon2 from "argon2";
 import prisma from "../../libs/prisma";
 import { LoginInput, RegisterUserInput } from "./user.dto";
@@ -24,6 +25,27 @@ export async function findUserByEmailOrUsername(
   return prisma.user.findFirst({
     where: {
       OR: [{ email: input }, { username: input }],
+    },
+  });
+}
+
+export async function followUser({
+  userId,
+  username,
+}: {
+  userId: string;
+  username: string;
+}): Promise<User> {
+  return prisma.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      following: {
+        connect: {
+          username,
+        },
+      },
     },
   });
 }

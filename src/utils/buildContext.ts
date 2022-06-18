@@ -1,5 +1,8 @@
+import { User } from "@prisma/client";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { app } from "./createServer";
+
+type CtxUser = Omit<User, "password">;
 
 export async function buildContext({
   request,
@@ -15,7 +18,7 @@ export async function buildContext({
   if (connectionParams || !request) {
     try {
       return {
-        user: app.jwt.verify(connectionParams?.Authorization || ""),
+        user: app.jwt.verify<CtxUser>(connectionParams?.Authorization || ""),
       };
     } catch (error) {
       return { user: null };
@@ -23,7 +26,7 @@ export async function buildContext({
   }
 
   try {
-    const user = await request.jwtVerify();
+    const user = await request.jwtVerify<User>();
     return { request, reply, user };
   } catch (error) {
     return {
@@ -34,4 +37,4 @@ export async function buildContext({
   }
 }
 
-export type Context = Awaited<ReturnType<typeof buildContext>>
+export type Context = Awaited<ReturnType<typeof buildContext>>;

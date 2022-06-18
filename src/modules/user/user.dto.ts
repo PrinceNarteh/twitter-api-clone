@@ -47,3 +47,9 @@ export class UserFollowers {
   @Field(() => [User])
   items: User[];
 }
+
+@ObjectType()
+export class FollowerUserInput {
+  @Field()
+  username: string;
+}
