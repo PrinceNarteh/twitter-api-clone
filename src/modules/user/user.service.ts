@@ -29,25 +29,49 @@ export async function findUserByEmailOrUsername(
   });
 }
 
-export async function followUser({
+export async function followOrUnfollowUser({
   userId,
   username,
 }: {
   userId: string;
   username: string;
 }): Promise<User> {
-  return prisma.user.update({
-    where: {
-      id: userId,
-    },
-    data: {
-      following: {
-        connect: {
-          username,
-        },
-      },
+  let user = await prisma.user.findUnique({
+    where: { id: userId },
+    include: {
+      followedBy: true,
     },
   });
+
+  const followers = user?.followedBy.map((user) => user.username);
+
+  if (followers?.includes(username)) {
+    return prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        following: {
+          disconnect: {
+            username,
+          },
+        },
+      },
+    });
+  } else {
+    return prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        following: {
+          connect: {
+            username,
+          },
+        },
+      },
+    });
+  }
 }
 
 export async function getUsers() {

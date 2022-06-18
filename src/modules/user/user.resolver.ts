@@ -22,7 +22,7 @@ import {
   findUserByEmailOrUsername,
   findUsersFollowedBy,
   findUsersFollowing,
-  followUser,
+  followOrUnfollowUser,
   getUsers,
 } from "./user.service";
 
@@ -86,7 +86,10 @@ class UserResolver {
     @Ctx() ctx: Context
   ) {
     try {
-      const result = await followUser({ ...input, userId: ctx.user?.id! });
+      const result = await followOrUnfollowUser({
+        ...input,
+        userId: ctx.user?.id!,
+      });
       return result;
     } catch (error: any) {
       throw new ApolloError(error);
