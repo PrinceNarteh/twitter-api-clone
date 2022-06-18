@@ -20,10 +20,21 @@ import {
   createUser,
   findUserByEmailOrUsername,
   followUser,
+  getUsers,
 } from "./user.service";
 
 @Resolver(() => User)
 class UserResolver {
+  @Query(() => [User])
+  async users() {
+    return getUsers();
+  }
+
+  @Query(() => User)
+  me(@Ctx() ctx: Context) {
+    return ctx.user;
+  }
+
   @Mutation(() => User)
   async register(@Arg("input") input: RegisterUserInput) {
     try {
@@ -31,11 +42,6 @@ class UserResolver {
     } catch (error) {
       throw error;
     }
-  }
-
-  @Query(() => User)
-  me(@Ctx() ctx: Context) {
-    return ctx.user;
   }
 
   @Mutation(() => String)

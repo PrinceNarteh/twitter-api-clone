@@ -49,3 +49,7 @@ export async function followUser({
     },
   });
 }
+
+export async function getUsers() {
+  return prisma.user.findMany();
+}
