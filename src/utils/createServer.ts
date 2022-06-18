@@ -12,6 +12,7 @@ import fastifyJwt from "@fastify/jwt";
 import UserResolver from "../modules/user/user.resolver";
 import { buildContext } from "./buildContext";
 import { fastifyAppClosePlugin } from "./plugins";
+import { bearerAuthChecker } from "./bearerAuthChecker";
 
 export const app = fastify();
 
@@ -39,6 +40,7 @@ app.register(fastifyJwt, {
 
 export async function createServer() {
   const schema = await buildSchema({
+    authChecker: bearerAuthChecker,
     resolvers: [UserResolver],
   });
 

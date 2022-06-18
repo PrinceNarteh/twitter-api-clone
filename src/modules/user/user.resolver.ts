@@ -2,6 +2,7 @@ import { ApolloError } from "apollo-server-core";
 import argon2 from "argon2";
 import {
   Arg,
+  Authorized,
   Ctx,
   FieldResolver,
   Mutation,
@@ -32,6 +33,7 @@ class UserResolver {
     return getUsers();
   }
 
+  @Authorized()
   @Query(() => User)
   me(@Ctx() ctx: Context) {
     return ctx.user;
@@ -77,6 +79,7 @@ class UserResolver {
     return token;
   }
 
+  @Authorized()
   @Mutation(() => User)
   async followUser(
     @Arg("input") input: FollowerUserInput,
@@ -90,6 +93,7 @@ class UserResolver {
     }
   }
 
+  @Authorized()
   @FieldResolver(() => UserFollowers)
   async followers(@Ctx() ctx: Context) {
     const data = await findUsersFollowedBy(ctx.user?.id!);
@@ -100,6 +104,7 @@ class UserResolver {
     };
   }
 
+  @Authorized()
   @FieldResolver(() => UserFollowers)
   async following(@Ctx() ctx: Context) {
     const data = await findUsersFollowing(ctx.user?.id!);
