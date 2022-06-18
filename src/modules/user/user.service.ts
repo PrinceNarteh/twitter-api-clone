@@ -64,3 +64,14 @@ export async function findUsersFollowing(userId: string) {
     },
   });
 }
+
+export async function findUsersFollowedBy(userId: string) {
+  return prisma.user.findUnique({
+    where: {
+      id: userId,
+    },
+    include: {
+      followedBy: true,
+    },
+  });
+}
