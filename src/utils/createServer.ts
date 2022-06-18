@@ -13,6 +13,7 @@ import UserResolver from "../modules/user/user.resolver";
 import { buildContext } from "./buildContext";
 import { fastifyAppClosePlugin } from "./plugins";
 import { bearerAuthChecker } from "./bearerAuthChecker";
+import { MessageResolver } from "../modules/message/message.resolver";
 
 export const app = fastify();
 
@@ -41,7 +42,7 @@ app.register(fastifyJwt, {
 export async function createServer() {
   const schema = await buildSchema({
     authChecker: bearerAuthChecker,
-    resolvers: [UserResolver],
+    resolvers: [UserResolver, MessageResolver],
   });
 
   const server = new ApolloServer({
